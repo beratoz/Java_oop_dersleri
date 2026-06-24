@@ -6,6 +6,7 @@ public class kutuphane_yonetim_sistemi {
             ArrayList<String> book = new ArrayList<String>();
             ArrayList<String> member = new ArrayList<String>();
             Library library = new Library(book, member);
+<<<<<<< HEAD
             library.addBook(1, "Nutuk", "Ataturk");
             library.addBook(2, "Safahat", "Mehmet Akif Ersoy");
             library.addBook(3, "Bati Felsefe Tarihi", "Bertrand Russell");
@@ -31,6 +32,10 @@ public class kutuphane_yonetim_sistemi {
             } else {
                   System.out.println("aranan KISI mevcut degil");
             }
+=======
+            library.addBook("Nutuko");
+            System.out.println("kitaplar" + library.getBooks());
+>>>>>>> 0cfa3d99b4e7d1ea1a20b0cd687b56ae5893a87e
 
       }
 }
@@ -60,10 +65,13 @@ class Book {
             return isbn;
       }
 
+<<<<<<< HEAD
       public void setIsbn(String isbn) {
             this.isbn = isbn;
       }
 
+=======
+>>>>>>> 0cfa3d99b4e7d1ea1a20b0cd687b56ae5893a87e
       public String getTitle() {
             return title;
       }
@@ -80,6 +88,10 @@ class Book {
 class Member {
       private String name;
       private int memberId;
+<<<<<<< HEAD
+=======
+      private List<String> members;
+>>>>>>> 0cfa3d99b4e7d1ea1a20b0cd687b56ae5893a87e
       private List<String> borrowedBooks;
 
       public Member(String name, int memberId, List<String> members) {
@@ -88,6 +100,17 @@ class Member {
             this.borrowedBooks = new ArrayList<>();
       }
 
+<<<<<<< HEAD
+=======
+      public Member(ArrayList<String> members) {
+            this.members = members;
+      }
+
+      public void addMember(String member) {
+            members.add(member);
+      }
+
+>>>>>>> 0cfa3d99b4e7d1ea1a20b0cd687b56ae5893a87e
       public String getName() {
             return name;
       }
@@ -143,6 +166,7 @@ class Library {
             this.members = members;
       }
 
+<<<<<<< HEAD
       public void addBook(int Isbn, String books, String author) {
             this.books.add(books);
       }
@@ -177,4 +201,14 @@ class Library {
             return false;
       }
 
+=======
+      public void addBook(String books) {
+            this.books.add(books);
+      }
+
+      public void addMember(String member) {
+            this.members.add(member);
+      }
+
+>>>>>>> 0cfa3d99b4e7d1ea1a20b0cd687b56ae5893a87e
 }
