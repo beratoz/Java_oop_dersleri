@@ -1,0 +1,82 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+package com.mycompany.testhesap;
+
+import java.util.Date;
+
+public class Hesap {
+   private int id;
+   private int bakiye;
+   private int yilSayisi;
+   private double yillikFaizOrani;
+   private double krediMiktari;
+   private Date olusturulanTarih;
+
+   Hesap() {
+      this(1, 1000, 2.5, 2, 3000.0);
+   }
+
+   Hesap(int id, int bakiye, double yillikFaizOrani, int yilSayisi, double krediMiktari) {
+      this.id = id;
+      this.bakiye = bakiye;
+      this.yilSayisi = yilSayisi;
+      this.krediMiktari = krediMiktari;
+      this.yillikFaizOrani = yillikFaizOrani;
+      this.olusturulanTarih = new Date();
+   }
+
+   public int getID() {
+      return this.id;
+   }
+
+   public void setID(int id) {
+      this.id = id;
+   }
+
+   public int getBakiye() {
+      return this.bakiye;
+   }
+
+   public void setBakiye(int bakiye) {
+      this.bakiye = bakiye;
+   }
+
+   public double getyillikFaizOrani() {
+      return this.yillikFaizOrani;
+   }
+
+   public void setyillikFaizOrani(double yillikFaizOrani) {
+      this.yillikFaizOrani = yillikFaizOrani;
+   }
+
+   public double getkrediMiktari() {
+      return this.krediMiktari;
+   }
+
+   public void setkrediMiktari(double krediMiktari) {
+      this.krediMiktari = krediMiktari;
+   }
+
+   public Date getolusturulanTarih() {
+      return this.olusturulanTarih;
+   }
+
+   public double[] aylikOdemeGetir() {
+      double aylikFaizOrani = this.yillikFaizOrani / 1200.0;
+      double aylikOdeme = this.krediMiktari * aylikFaizOrani / (1.0 - Math.pow(1.0 / (1.0 + aylikFaizOrani), (double)(this.yilSayisi * 12)));
+      double[] arr = new double[]{aylikFaizOrani, aylikOdeme};
+      return arr;
+   }
+
+   public void paraCek(int miktar) {
+      if (miktar < this.bakiye) {
+         this.bakiye -= miktar;
+      } else {
+         System.out.println("hesab\u0131n\u0131zdakinden daha fazla para \u00e7ekemezsiniz");
+      }
+
+   }
+
+   public void paraYatir(int miktar) {
+      this.bakiye += miktar;
+   }
+}

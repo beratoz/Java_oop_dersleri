@@ -1,0 +1,230 @@
+// Interface Tanımları
+interface Manageable {
+    void monitor(); // abstract metot
+    void optimize();
+}
+
+interface Interactable {
+    void interact(User user);
+}
+
+// Enum Tanımlama
+enum SystemStatus {
+    ACTIVE,
+    MAINTENANCE,
+    INACTIVE
+}
+
+// Abstract Class Tanımlama
+abstract class CitySystem implements Manageable, Interactable {
+  // parametreler
+    protected String name;
+    protected SystemStatus status;
+    protected String dateCreated;
+  
+// yapıcı metot
+    public CitySystem(String name, String dateCreated, SystemStatus status) {
+        this.name = name;
+        this.dateCreated = dateCreated;
+        this.status = status;
+    }
+
+    public SystemStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(SystemStatus status) {
+        this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "System Name: " + name + ", Status: " + status;
+    }
+
+    public abstract void simulate();
+}
+
+// Alt Sınıflar
+class VehicleManagement extends CitySystem {
+    private int vehicleCount;
+
+    public VehicleManagement(String name, String dateCreated, SystemStatus status, int vehicleCount) {
+        super(name, dateCreated, status);
+        this.vehicleCount = vehicleCount;
+    }
+
+    public void addVehicle() {
+        vehicleCount++;
+    }
+
+    public void removeVehicle() {
+        vehicleCount--;
+    }
+
+    @Override
+    public void simulate() {
+        System.out.println("Simulating Vehicle Management System...");
+    }
+
+    @Override
+    public void monitor() {
+        System.out.println("Monitoring vehicles...");
+    }
+
+    @Override
+    public void optimize() {
+        System.out.println("Optimizing vehicle management...");
+    }
+
+    @Override
+    public void interact(User user) {
+        System.out.println(user.getName() + " is interacting with Vehicle Management System.");
+    }
+}
+
+class EnergyManagement extends CitySystem {
+    private double energyConsumption;
+
+    public EnergyManagement(String name, String dateCreated, SystemStatus status, double energyConsumption) {
+        super(name, dateCreated, status);
+        this.energyConsumption = energyConsumption;
+    }
+
+    public void reduceEnergyConsumption(double amount) {
+        energyConsumption -= amount;
+    }
+
+    @Override
+    public void simulate() {
+        System.out.println("Simulating Energy Management System...");
+    }
+
+    @Override
+    public void monitor() {
+        System.out.println("Monitoring energy consumption...");
+    }
+
+    @Override
+    public void optimize() {
+        System.out.println("Optimizing energy consumption...");
+    }
+
+    @Override
+    public void interact(User user) {
+        System.out.println(user.getName() + " is interacting with Energy Management System.");
+    }
+}
+
+class WasteManagement extends CitySystem {
+    private int wasteLevel;
+
+    public WasteManagement(String name, String dateCreated, SystemStatus status, int wasteLevel) {
+        super(name, dateCreated, status);
+        this.wasteLevel = wasteLevel;
+    }
+
+    public void collectWaste() {
+        wasteLevel--;
+    }
+
+    @Override
+    public void simulate() {
+        System.out.println("Simulating Waste Management System...");
+    }
+
+    @Override
+    public void monitor() {
+        System.out.println("Monitoring waste level...");
+    }
+
+    @Override
+    public void optimize() {
+        System.out.println("Optimizing waste management...");
+    }
+
+    @Override
+    public void interact(User user) {
+        System.out.println(user.getName() + " is interacting with Waste Management System.");
+    }
+}
+
+// Kullanıcı Sınıfı
+class User {
+    private String name;
+    private String userType;
+
+    public User(String name, String userType) {
+        this.name = name;
+        this.userType = userType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+}
+
+// Ana Yönetim Sistemi
+import java.util.ArrayList;
+
+class SmartCitySystem {
+    private ArrayList<CitySystem> systems;
+
+    public SmartCitySystem() {
+        systems = new ArrayList<>();
+    }
+
+    public void addSystem(CitySystem system) {
+        systems.add(system);
+    }
+
+    public void displayAllSystems() {
+        for (CitySystem system : systems) {
+            System.out.println(system);
+        }
+    }
+
+    public void runSimulations() {
+        for (CitySystem system : systems) {
+            system.simulate();
+        }
+    }
+
+    public ArrayList<CitySystem> getSystems() {
+        return systems;
+    }
+}
+
+// Ana Sınıf
+public class Main {
+    public static void main(String[] args) {
+        SmartCitySystem smartCity = new SmartCitySystem();
+
+        // Sistem Ekleme
+        VehicleManagement vm = new VehicleManagement("Vehicle System", "2023-12-01", SystemStatus.ACTIVE, 10);
+        EnergyManagement em = new EnergyManagement("Energy System", "2023-12-01", SystemStatus.MAINTENANCE, 500.0);
+        WasteManagement wm = new WasteManagement("Waste System", "2023-12-01", SystemStatus.INACTIVE, 20);
+
+        smartCity.addSystem(vm);
+        smartCity.addSystem(em);
+        smartCity.addSystem(wm);
+
+        // Sistemlerin Görüntülenmesi
+        smartCity.displayAllSystems();
+
+        // Simülasyonların Çalıştırılması
+        smartCity.runSimulations();
+
+        // Kullanıcı Etkileşimi
+        User admin = new User("Admin123", "ADMIN");
+        smartCity.getSystems().get(0).interact(admin);
+    }
+}
